@@ -1,0 +1,14 @@
+﻿source,row,order_id,category,issue
+amazon,32,AMZ-001,duplicate,duplicate transaction; first valid occurrence at row 2; SKU SKU-02
+amazon,33,AMZ-006,duplicate,duplicate transaction; first valid occurrence at row 7; SKU SKU-01
+amazon,34,AMZ-BAD-32,rejected,invalid quantity
+amazon,35,AMZ-BAD-33,rejected,invalid price/amount
+amazon,36,,rejected,missing order_id
+amazon,37,AMZ-BAD-35,rejected,missing sku
+amazon,38,AMZ-BAD-36,rejected,invalid sale_date
+marketplace,22,MP-001,duplicate,duplicate transaction; first valid occurrence at row 2; SKU SKU-02
+marketplace,23,MP-003,duplicate,conflicting duplicate transaction; first valid occurrence at row 4; SKU SKU-04
+marketplace,24,MP-BAD-1,rejected,unknown or unsupported currency: XYZ
+shopify,28,SH-001,duplicate,duplicate transaction; first valid occurrence at row 2; SKU SKU-02
+shopify,29,SH-BAD-1,rejected,invalid quantity
+shopify,30,SH-BAD-2,rejected,missing currency

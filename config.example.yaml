@@ -1,0 +1,50 @@
+base_currency: USD
+supported_currencies: [USD, EUR, GBP, BRL]
+output_dir: output
+
+exchange_rates:
+  url: https://api.frankfurter.dev/v2/rates
+  timeout_seconds: 5
+  retries: 2  # Two retries after the first attempt; three requests maximum.
+  backoff_seconds: 0.5
+  cache_file: cache/exchange_rates.json
+  max_cache_age_days: 14
+
+sources:
+  amazon:
+    file: examples/input/amazon_sales.csv
+    date_format: "%Y-%m-%d"
+    decimal_separator: "."
+    amount_type: unit_price
+    columns:
+      order_id: order_id
+      sku: sku
+      quantity: quantity
+      amount: unit_price
+      currency: currency
+      sale_date: date
+  shopify:
+    file: examples/input/shopify_sales.xlsx
+    date_format: "%Y-%m-%dT%H:%M:%S"
+    decimal_separator: "."
+    amount_type: line_total
+    columns:
+      order_id: id
+      sku: product_sku
+      quantity: qty
+      amount: total_amount
+      currency: currency_code
+      sale_date: created_at
+  marketplace:
+    file: examples/input/marketplace_sales.csv
+    delimiter: ";"
+    date_format: "%d/%m/%Y"
+    decimal_separator: ","
+    amount_type: unit_price
+    columns:
+      order_id: transaction_id
+      sku: product
+      quantity: units
+      amount: price
+      currency: currency
+      sale_date: sale_date

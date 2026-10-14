@@ -3,19 +3,18 @@
 Python automation that combines sales exports, checks inconsistent records,
 converts currencies through a REST API, and delivers reconciled Excel/CSV reports.
 
+For sales records that already arrive as JSON, a FastAPI endpoint runs the same
+validation and duplicate checks and returns the results directly.
+
 ![Summary of the sample report](assets/summary.png)
 
 [Watch the 75-second walkthrough](assets/demo.mp4) ·
 [Download the Excel report](examples/output/report.xlsx)
 
-## Problem
-
 Sales channels export different columns, date formats, decimal separators, and
 currencies. Combining those files manually means checking each row, finding
 repeated transactions, and converting amounts before totals can be trusted.
 A missed duplicate or invalid quantity changes the final report.
-
-## Solution
 
 Run one command against a YAML configuration. The pipeline maps each export to a
 common schema, separates invalid rows, removes duplicate lines, converts amounts
@@ -25,7 +24,7 @@ The report keeps accepted transactions and issues traceable to their source and
 row number. A rejected row does not prevent the remaining valid rows from being
 processed.
 
-## Demo result
+## Example run
 
 The included synthetic dataset and reference-rate snapshot produce:
 
@@ -114,20 +113,24 @@ of the venv and pip installation commands, then activate `.venv` as above.
 Local runs write these files to `output/`, along with `app.log`. The files under
 `examples/output/` are the fixed portfolio examples and are not overwritten.
 
-## Optional FastAPI demo
+## Validate sales over HTTP
 
-The repository also includes a stateless JSON API for validating and deduplicating
-sales records. It reuses the existing domain rules and returns accepted records,
-issues and separate currency totals without file writes or external requests.
+Send a batch of JSON records to `POST /sales/validate`. The response contains
+accepted sales, invalid rows, duplicates and totals for each currency. A bad
+record is reported without preventing the others from being processed.
 
-See [the API demo guide](docs/api-demo.md) for installation, endpoints, example
-requests/responses, tests and a portfolio walkthrough. Install the `api` extra to run
-it; the CLI does not require FastAPI.
+```bash
+python -m pip install -e ".[api]"
+python -m uvicorn sales_automation.api:app --host 127.0.0.1 --port 8000
+```
 
-![FastAPI demo overview](assets/api/01-service-cover.png)
+Open <http://127.0.0.1:8000/docs> to try a request, or use
+[the sample JSON](examples/api/request.json). The [API guide](docs/api-demo.md)
+explains the fields, limits and error responses.
 
-The [API gallery](assets/api/README.md) includes a real sample response and an
-interactive-documentation screenshot using synthetic sales data.
+Unlike the file workflow, this endpoint returns JSON directly. It does not write
+reports or convert currencies. [Screenshots and a sample response](assets/api/README.md)
+show what it returns.
 
 ## Tests
 
@@ -152,8 +155,9 @@ assets/                      Report preview and walkthrough
 examples/input/              Synthetic channel exports
 examples/output/             Committed example reports
 examples/exchange_rates.json Controlled FX snapshot
-sales_automation/            Reconciliation pipeline
-scripts/                     Synthetic input generator
+sales_automation/            Reconciliation pipeline and sales API
+docs/                        API usage and request examples
+scripts/                     Sample data and screenshot generation
 tests/                       Automated checks
 config.example.yaml          Source mappings and runtime settings
 ```
@@ -170,6 +174,6 @@ config.example.yaml          Source mappings and runtime settings
 
 ## Tech stack
 
-Python · pandas · openpyxl · requests · PyYAML · pytest · Ruff
+Python · FastAPI · pandas · openpyxl · requests · PyYAML · pytest · Ruff
 
 Licensed under [MIT](LICENSE).

@@ -1,18 +1,17 @@
-# FastAPI gallery
+# API screenshots
 
-The three numbered PNGs are presentation assets for the local portfolio demo:
+These images show the sales validation endpoint and its output:
 
-1. `01-service-cover.png` — service overview.
+1. `01-service-cover.png` — what the endpoint does.
 2. `02-sample-result.png` — actual sample response, counts, issues and currency totals.
-3. `03-api-docs.png` — screenshot of the running API documentation in a presentation frame.
+3. `03-api-docs.png` — the API documentation in the browser.
 
-Each image is 2000×1500 pixels (4:3). All example sales are synthetic. The figures
-describe the sample request, not customer results, performance or freelancer revenue.
+Each image is 2000×1500 pixels (4:3). The sales records are fictional.
 
 `swagger-raw.png` is the unframed documentation screenshot. `sample-response.json`
 was fetched from the running API and checked against `examples/api/response.json`.
-`capture-metadata.json` records capture time. HTML files are reproducible layouts,
-not an additional application or claims about a client interface.
+`capture-metadata.json` records when they were captured. The HTML files contain
+the layouts used to render the images.
 
 ## Recreate
 

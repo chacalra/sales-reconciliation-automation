@@ -1,12 +1,11 @@
-# FastAPI sales validation demo
+# Sales validation API
 
-This optional API complements the file-based reconciliation CLI. It demonstrates a
-JSON contract, Pydantic validation, partial batch processing, error responses,
-OpenAPI documentation and endpoint tests. It reuses the existing normalization,
-validation and duplicate-detection functions.
+Use this endpoint when sales records arrive as JSON rather than CSV or Excel files.
+It checks the fields, normalizes values and finds duplicates using the same functions
+as the file workflow. The response contains accepted records, issues and totals for
+each currency. It does not create Excel reports or fetch exchange rates.
 
-All sample records are fictional. This is a locally runnable portfolio component,
-not a deployed service or a client case study.
+The examples use fictional sales records.
 
 ## Run locally
 
@@ -97,23 +96,12 @@ HTTP tests validate the example, mixed/error batches, decimal handling, duplicat
 identity and simultaneous requests. Exchange-rate requests are forbidden by the
 API test fixture. HTTP tests skip if FastAPI is absent; CI installs both extras.
 
-## Boundaries
+## Storage and deployment
 
-No configuration/file reads, report writes, exchange-rate requests, persistent
-records or deduplication across requests. Each call operates on independent data.
-The original CLI still provides file processing and report generation.
+Each request is processed in memory. Records are not saved, and duplicate checks
+apply only within that request. Use the CLI for file imports and Excel reports.
 
-Run on localhost. Authentication, public hosting, storage, file uploads and
-production deployment are outside this sample's scope.
+The commands above bind to localhost. Authentication and public hosting are not
+configured in this project.
 
-## Portfolio walkthrough
-
-1. Show `/docs` and the request model.
-2. Execute the sample and show the two accepted records.
-3. Explain the rejected quantity, duplicate and reconciliation counts.
-4. Show separate currency totals, precise money strings and the original order ID.
-5. Send an invalid request to demonstrate HTTP 422, then show endpoint tests.
-
-Existing video/report assets demonstrate the CLI. The [FastAPI gallery](../assets/api/README.md)
-includes a separate documentation screenshot and a presentation of a verified API
-response. Its capture script and data are included for reproducibility.
+[Screenshots](../assets/api/README.md) show the documentation and the sample response.

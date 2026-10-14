@@ -79,17 +79,17 @@ def main() -> None:
         + "\n"
     )
     summary = result["summary"]
-    footer = "<footer class='footer'><span>Portfolio demo · Synthetic sales data</span><span>Python REST API</span></footer>"
+    footer = "<footer class='footer'><span>Sample sales data</span><span>Python / FastAPI</span></footer>"
     cover = document(
         "<main><div class='eyebrow'>Python / FastAPI</div>"
-        "<h1>Small APIs.<br><span class='accent'>Clear contracts.</span></h1>"
-        "<div class='sub'>From defined inputs to documented responses.</div>"
-        "<div class='flow'><div class='node'>JSON input</div><span class='arrow'>→</span>"
-        "<div class='node'>Validate & process</div><span class='arrow'>→</span>"
-        "<div class='node'>JSON output</div></div>"
+        "<h1>Sales data<br><span class='accent'>validation API</span></h1>"
+        "<div class='sub'>Checks fields, finds duplicates and returns a summary.</div>"
+        "<div class='flow'><div class='node'>Sales records</div><span class='arrow'>→</span>"
+        "<div class='node'>Validation</div><span class='arrow'>→</span>"
+        "<div class='node'>Results & issues</div></div>"
         "<div class='dark route'><span class='method'>POST</span>/sales/validate</div>"
-        "<div class='badges' style='margin-top:28px'><span class='badge'>Input validation</span>"
-        "<span class='badge'>API documentation</span><span class='badge'>Tests included</span></div>"
+        "<div class='badges' style='margin-top:28px'><span class='badge'>JSON input / output</span>"
+        "<span class='badge'>Request examples</span><span class='badge'>Automated tests</span></div>"
         + footer
         + "</main>"
     )
@@ -111,8 +111,8 @@ def main() -> None:
         for issue in result["issues"]
     )
     run = document(
-        "<main><div class='eyebrow'>Actual API response / HTTP 200</div>"
-        "<h2>Valid records stay.<br><span class='accent'>Issues stay visible.</span></h2>"
+        "<main><div class='eyebrow'>POST /sales/validate · HTTP 200</div>"
+        "<h2>Sales validation results</h2>"
         f"<div class='stats'>{stats}</div><div class='split'>"
         f"<div class='dark'><div class='route'>Response excerpt</div><pre>{excerpt}</pre>"
         "<div style='margin-top:22px;color:#a2c9d2;font-size:16px'>Separate currency totals.<br>Exact decimal strings.</div></div>"
@@ -131,9 +131,9 @@ def main() -> None:
         page.screenshot(path=str(output / "swagger-raw.png"))
         docs = document(
             "<main><div class='eyebrow'>Interactive documentation</div>"
-            "<h2>Explore the API contract.</h2>"
+            "<h2>Available endpoints</h2>"
             "<img class='doc' src='swagger-raw.png' alt='Actual local API documentation'>"
-            "<div class='caption'>Request schemas · Response models · Try-it-out controls</div>"
+            "<div class='caption'>Send a request from the browser and inspect the response.</div>"
             + footer
             + "</main>"
         )

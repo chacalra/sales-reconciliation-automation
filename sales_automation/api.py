@@ -1,4 +1,4 @@
-"""Local, stateless JSON demo reusing the CLI's sales validation rules."""
+"""HTTP endpoints for the existing sales validation rules."""
 
 from collections import defaultdict
 from dataclasses import asdict
@@ -87,9 +87,8 @@ app = FastAPI(
     title="Sales Validation API",
     version="0.1.0",
     description=(
-        "Local portfolio demo: validate, normalize and deduplicate JSON sales records. "
-        "No database, file writes or exchange-rate requests. Monetary values are returned "
-        "as decimal strings, grouped by their original currency."
+        "Send sales records as JSON to check fields, normalize values and find duplicates. "
+        "The response includes accepted records, issues and totals for each currency."
     ),
 )
 
@@ -103,7 +102,7 @@ def health() -> HealthOutput:
     "/sales/validate",
     response_model=BatchOutput,
     tags=["Sales"],
-    summary="Validate a batch without discarding valid records",
+    summary="Validate sales records",
     description=(
         "Supply 1–1000 records with string-valued cells. Invalid sale values and missing "
         "cells become per-record issues; malformed JSON, wrong types, unknown fields and "

@@ -3,6 +3,9 @@
 Python automation that combines sales exports, checks inconsistent records,
 converts currencies through a REST API, and delivers reconciled Excel/CSV reports.
 
+For sales records that already arrive as JSON, a FastAPI endpoint runs the same
+validation and duplicate checks and returns the results directly.
+
 ![Summary of the sample report](assets/summary.png)
 
 [Watch the 75-second walkthrough](assets/demo.mp4) ·
@@ -114,20 +117,24 @@ of the venv and pip installation commands, then activate `.venv` as above.
 Local runs write these files to `output/`, along with `app.log`. The files under
 `examples/output/` are the fixed portfolio examples and are not overwritten.
 
-## Optional FastAPI demo
+## Validate sales over HTTP
 
-The repository also includes a stateless JSON API for validating and deduplicating
-sales records. It reuses the existing domain rules and returns accepted records,
-issues and separate currency totals without file writes or external requests.
+Send a batch of JSON records to `POST /sales/validate`. The response contains
+accepted sales, invalid rows, duplicates and totals for each currency. A bad
+record is reported without preventing the others from being processed.
 
-See [the API demo guide](docs/api-demo.md) for installation, endpoints, example
-requests/responses, tests and a portfolio walkthrough. Install the `api` extra to run
-it; the CLI does not require FastAPI.
+```bash
+python -m pip install -e ".[api]"
+python -m uvicorn sales_automation.api:app --host 127.0.0.1 --port 8000
+```
 
-![FastAPI demo overview](assets/api/01-service-cover.png)
+Open <http://127.0.0.1:8000/docs> to try a request, or use
+[the sample JSON](examples/api/request.json). The [API guide](docs/api-demo.md)
+explains the fields, limits and error responses.
 
-The [API gallery](assets/api/README.md) includes a real sample response and an
-interactive-documentation screenshot using synthetic sales data.
+Unlike the file workflow, this endpoint returns JSON directly. It does not write
+reports or convert currencies. [Screenshots and a sample response](assets/api/README.md)
+show what it returns.
 
 ## Tests
 

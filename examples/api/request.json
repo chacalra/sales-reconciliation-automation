@@ -1,0 +1,10 @@
+{
+  "amount_type": "unit_price",
+  "decimal_separator": ".",
+  "records": [
+    {"source": "web", "order_id": "0001", "sku": "PEN", "quantity": "2", "amount": "10.25", "currency": " usd ", "sale_date": "2026-10-10"},
+    {"source": "web", "order_id": "0001", "sku": "PEN", "quantity": "2", "amount": "10.25", "currency": "USD", "sale_date": "2026-10-10"},
+    {"source": "web", "order_id": "0002", "sku": "BOOK", "quantity": "-1", "amount": "5.00", "currency": "USD", "sale_date": "2026-10-10"},
+    {"source": "store", "order_id": "0003", "sku": "BOOK", "quantity": "1", "amount": "15.00", "currency": "EUR", "sale_date": "2026-10-10"}
+  ]
+}

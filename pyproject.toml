@@ -10,7 +10,17 @@ requires-python = ">=3.11"
 dependencies = ["pandas>=2.2,<3", "openpyxl>=3.1,<4", "requests>=2.32,<3", "PyYAML>=6,<7"]
 
 [project.optional-dependencies]
-dev = ["pytest>=8,<10", "ruff>=0.11,<1"]
+dev = [
+    "httpx>=0.27,<1",
+    "httpx2>=2.13.1",
+    "pytest>=8,<10",
+    "ruff>=0.11,<1",
+]
+api = [
+    "fastapi>=0.115,<1",
+    "pydantic>=2,<3",
+    "uvicorn>=0.30,<1",
+]
 
 [project.scripts]
 sales-automation = "sales_automation.main:main"

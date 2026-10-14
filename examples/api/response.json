@@ -1,0 +1,52 @@
+{
+  "summary": {
+    "input_records": 4,
+    "valid_records": 2,
+    "rejected_records": 1,
+    "duplicates": 1
+  },
+  "sales": [
+    {
+      "source": "web",
+      "row": 1,
+      "order_id": "0001",
+      "sku": "PEN",
+      "quantity": 2,
+      "unit_price": "10.25",
+      "currency": "USD",
+      "sale_date": "2026-10-10",
+      "original_amount": "20.50"
+    },
+    {
+      "source": "store",
+      "row": 4,
+      "order_id": "0003",
+      "sku": "BOOK",
+      "quantity": 1,
+      "unit_price": "15.00",
+      "currency": "EUR",
+      "sale_date": "2026-10-10",
+      "original_amount": "15.00"
+    }
+  ],
+  "issues": [
+    {
+      "source": "web",
+      "row": 2,
+      "order_id": "0001",
+      "category": "duplicate",
+      "issue": "duplicate transaction; first valid occurrence at row 1; SKU PEN"
+    },
+    {
+      "source": "web",
+      "row": 3,
+      "order_id": "0002",
+      "category": "rejected",
+      "issue": "invalid quantity"
+    }
+  ],
+  "totals_by_currency": {
+    "EUR": "15.00",
+    "USD": "20.50"
+  }
+}

@@ -114,6 +114,21 @@ of the venv and pip installation commands, then activate `.venv` as above.
 Local runs write these files to `output/`, along with `app.log`. The files under
 `examples/output/` are the fixed portfolio examples and are not overwritten.
 
+## Optional FastAPI demo
+
+The repository also includes a stateless JSON API for validating and deduplicating
+sales records. It reuses the existing domain rules and returns accepted records,
+issues and separate currency totals without file writes or external requests.
+
+See [the API demo guide](docs/api-demo.md) for installation, endpoints, example
+requests/responses, tests and a portfolio walkthrough. Install the `api` extra to run
+it; the CLI does not require FastAPI.
+
+![FastAPI demo overview](assets/api/01-service-cover.png)
+
+The [API gallery](assets/api/README.md) includes a real sample response and an
+interactive-documentation screenshot using synthetic sales data.
+
 ## Tests
 
 Tests cover normalization, validation, deduplication, FX retries and cache handling,

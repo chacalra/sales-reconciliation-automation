@@ -11,14 +11,10 @@ validation and duplicate checks and returns the results directly.
 [Watch the 75-second walkthrough](assets/demo.mp4) ·
 [Download the Excel report](examples/output/report.xlsx)
 
-## Problem
-
 Sales channels export different columns, date formats, decimal separators, and
 currencies. Combining those files manually means checking each row, finding
 repeated transactions, and converting amounts before totals can be trusted.
 A missed duplicate or invalid quantity changes the final report.
-
-## Solution
 
 Run one command against a YAML configuration. The pipeline maps each export to a
 common schema, separates invalid rows, removes duplicate lines, converts amounts
@@ -28,7 +24,7 @@ The report keeps accepted transactions and issues traceable to their source and
 row number. A rejected row does not prevent the remaining valid rows from being
 processed.
 
-## Demo result
+## Example run
 
 The included synthetic dataset and reference-rate snapshot produce:
 
@@ -159,8 +155,9 @@ assets/                      Report preview and walkthrough
 examples/input/              Synthetic channel exports
 examples/output/             Committed example reports
 examples/exchange_rates.json Controlled FX snapshot
-sales_automation/            Reconciliation pipeline
-scripts/                     Synthetic input generator
+sales_automation/            Reconciliation pipeline and sales API
+docs/                        API usage and request examples
+scripts/                     Sample data and screenshot generation
 tests/                       Automated checks
 config.example.yaml          Source mappings and runtime settings
 ```
@@ -177,6 +174,6 @@ config.example.yaml          Source mappings and runtime settings
 
 ## Tech stack
 
-Python · pandas · openpyxl · requests · PyYAML · pytest · Ruff
+Python · FastAPI · pandas · openpyxl · requests · PyYAML · pytest · Ruff
 
 Licensed under [MIT](LICENSE).

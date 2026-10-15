@@ -13,12 +13,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
-      - uses: actions/setup-python@v7
-        with:
-          python-version: "3.13"
-      - name: Install dependencies
-        run: python -m pip install -e ".[dev,api]"
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v6
+
+      - name: Set up Python
+        run: uv python install 3.13
+
+      - name: Install locked dependencies
+        run: uv sync --frozen --extra dev --extra api
+
       - name: Lint
-        run: ruff check .
+        run: uv run ruff check .
+
       - name: Test
-        run: pytest -q
+        run: uv run pytest -q
